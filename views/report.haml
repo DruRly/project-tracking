@@ -1,0 +1,56 @@
+.row
+  .ninecol
+    .org-subtitle
+      %p View All 
+      %hr
+    .org-listing
+      -@organizations.each do |org|
+        .row
+          .onecol
+            %p &nbsp;
+          .tencol
+            .ninecol
+              .eightcol
+                %p
+                  .item
+                    %a{:href => url("organization/#{org.id}")} #{org.name}
+                    -if org.projects.count != 0
+                      .row
+                        .onecol 
+                          %p &nbsp;
+                        .sixcol
+                          -org.projects.each do |project|
+                            .row
+                              .threecol
+                                %a{:href => ("/project/#{project.id}")} #{project.name}
+                              .twocol
+                                ID: #{project.id}
+                              %br
+                              .row
+                                .onecol
+                                  %p &nbsp;
+                                .sevencol
+                                  -project.requests.each do |req|
+                                    .row
+                                      .threecol
+                                        #{req.name}
+                                      .onecol
+                                        %form{:class => "request_form", :action => "/request_edit/#{req.id}", :method => "get"}
+                                          %input{:type => "submit", :value => "Move", :style => "margin-top: -20px;"}
+                                      -unless req.accepted == true 
+                                        .onecol
+                                          %form{:class => "request_form", :action => "/accept_request/#{req.id}", :method => "post"}
+                                            %input{:type => "hidden", :name => "_method", :value => "POST"}
+                                            %input{:type => "submit", :value => "Accept", :style => "margin-top:-20px;"}   
+                                      .onecol
+                                        -status = req.accepted ? "Remove" : "Deny"
+                                        %form{:class => "request_form", :action => "/deny_request/#{req.id}", :method => "post"}
+                                          %input{:type => "hidden", :name => "_method", :value => "DELETE"}
+                                          %input{:type => "submit", :value => status, :style => "margin-top:-20px;"}
+  .twocol
+    .org-panel-box
+      %p{:class => "recent-item-header"} Recent Projects
+      -@recent_projects.each do |project|
+        .row
+          .recent-item
+            %a{:href => ("/project/#{project.id}")} #{project.name} 

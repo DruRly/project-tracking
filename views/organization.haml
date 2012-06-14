@@ -1,0 +1,43 @@
+.row
+  .ninecol
+    .org-show
+      .row
+        .tencol 
+          .ninecol
+            .eightcol
+              .show-item
+                .row
+                  .eightcol 
+                    #{@organization.name}
+                  .threecol
+                    #{@projects_count} Projects 
+                .show-description
+                  Projects
+                  -@org_projects.each do |project|
+                    .row 
+                      .onecol 
+                        &nbsp;
+                      .sixcol
+                        %p 
+                          %a{:href => ("/project/#{project.id}")} #{project.name}
+                - if authorized? 
+                  %br
+                  .row
+                    .twocol
+                      %form{:class => "request_form", :action => "/organization_delete/#{@organization.id}", :method => "post"}
+                        %input{:type => "hidden", :name => "_method", :value => "DELETE"}
+                        %input{:type => "submit", :value => "Delete", :class => "submit-button"}
+                    .twocol 
+                      %a{:href => url("/organization_edit/#{@organization.id}"), :class => "submit-button", :style => "margin-top:23px"} Edit 
+                    .threecol
+                      %a{:href => url("/project_new/#{@organization.id}"), :class => "submit-button", :style => "margin-top:23px"} Add Project 
+
+        
+  .twocol
+    .org-panel-box
+      %p{:class => "recent-item-header"} Recent Projects
+      -@recent_projects.each do |project|
+        .row
+          .recent-item
+            %a{:href => ("/project/#{project.id}")} #{project.name}  
+

@@ -1,0 +1,28 @@
+.row
+	.dialogue
+		%p Find Projects - Get Involved
+.row
+	.ninecol
+		.subtitle
+			%p Open Projects
+			%hr
+		.project-listing
+			-@random_projects.each do |project|
+				.row
+					.onecol
+						%p &nbsp;
+					.tencol 
+						.ninecol
+							.eightcol
+								%p 
+									.item
+										%a{:href => url("project/#{project.id}")} #{project.name}
+										%span(class="description")	
+											#{project.description}
+	.twocol
+		.panel-box
+			%p{:class => "recent-item-header"} Recent Projects
+			-@recent_projects.each do |project|
+				.row
+					.recent-item
+						%a{:href => ("/project/#{project.id}")} #{project.name} 

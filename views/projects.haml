@@ -1,0 +1,26 @@
+.row
+  .ninecol
+    .org-subtitle
+      %p All Projects
+      %hr
+    .org-listing
+      -@projects.each do |project|
+        .row
+          .onecol
+            %p &nbsp;
+          .tencol 
+            .ninecol
+              .eightcol
+                %p 
+                  .item
+                    %a{:href => url("project/#{project.id}")} #{project.name}
+                    %span(class="description")  
+                      #{project.description}
+  .twocol
+    .org-panel-box
+      %p{:class => "recent-item-header"} Recent Projects
+      -@recent_projects.each do |project|
+        .row
+          .recent-item
+            %a{:href => ("/project/#{project.id}")} #{project.name} 
+

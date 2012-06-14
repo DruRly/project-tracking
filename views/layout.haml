@@ -1,0 +1,47 @@
+!!!
+%html 
+	%head 
+		%link(rel="stylesheet" href="/css/custom.css")
+		%link(rel="stylesheet" href="/css/styles.css")
+		%link(rel="stylesheet" href="/css/1140.css")
+		%link(rel="stylesheet" href="/css/ie.css")
+		%link(rel="stylesheet" href="http://fonts.googleapis.com/css?family=Trocchi")
+		%link(rel="stylesheet" href="http://fonts.googleapis.com/css?family=Molengo")
+		%title 
+			Service Learning 
+		#header
+			.container 
+				.row 
+					.sevencol
+						.logo
+							.row
+								.twocol
+									%img(src="/images/56.png")
+								.sixcol
+									%p Service Learning
+					.threecol
+						.row
+							.navigation
+								.twocol
+									%p
+										%a{:href => ('/')} Home
+								.twocol
+									%p 
+										%a{:href => ('/projects')} Projects
+								.twocol 
+									%p(style="width:180px;") 
+										%a{:href => ('/organizations')} Organizations
+
+		%body 
+			&nbsp;
+			.container
+				.row
+					.twelvecol
+						=yield
+
+									
+
+
+
+
+

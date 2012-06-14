@@ -1,0 +1,51 @@
+.row
+  .ninecol
+    .org-show
+      .row
+        .tencol 
+          .ninecol
+            .eightcol
+              .show-item
+                .row
+                  .fivecol 
+                    %a{:href => ("/report")} View All
+                %br
+                .row
+                  .fivecol 
+                    %a{:href => url("/organization_new")} Add Organization 
+                %br
+                .row
+                  .fivecol
+                    Student Requests 
+                  .row 
+                    .onecol
+                      &nbsp;
+                    .fivecol
+                      -@requests.each do |request|
+                        .row
+                          .twocol
+                            %p{:style => "font-size:13px;"} #{request.name}
+                          .threecol
+                            %p{:style => "font-size:13px;"} #{request.email_address}
+                          .threecol
+                            %p{:style => "font-size:13px;"} #{request.project.name}
+                          .onecol
+                            %form{:class => "request_form", :action => "/accept_request/#{request.id}", :method => "post"}
+                              %input{:type => "hidden", :name => "_method", :value => "POST"}
+                              %input{:type => "submit", :value => "Accept", :style => "margin-top:-20px;"}
+                          .onecol
+                            %form{:class => "request_form", :action => "/deny_request/#{request.id}", :method => "post"}
+                              %input{:type => "hidden", :name => "_method", :value => "DELETE"}
+                              %input{:type => "submit", :value => "Deny", :style => "margin-top:-20px;"}
+                          %br 
+
+
+
+        
+  .twocol
+    .org-panel-box
+      %p{:class => "recent-item-header"} Recent Projects
+      -@recent_projects.each do |project|
+        .row
+          .recent-item
+            %a{:href => ("/project/#{project.id}")} #{project.name} 

@@ -1,0 +1,41 @@
+.row
+  .ninecol
+    .org-show
+      .row
+        .tencol 
+          .ninecol
+            .eightcol
+              .show-item
+                .row
+                  .fivecol 
+                    Edit Project
+                    .row
+                      .onecol
+                        &nbsp;
+                      .sixcol
+                        %form{:method => "post", :action => "/project_update/#{@project.id}", :class => "request_form"}
+                          Project Name:
+                          %input{:name => "name", :type => "text", :value => "#{@project.name}"}/
+                          %br
+                          %br
+                          Description: 
+                          %br
+                          %textarea{:name => "description", :cols => 38, :rows => 6}
+                            #{@project.description}
+                          %br
+                          %br
+                          \# / Positions: 
+                          %input{:name => "positions", :type => "int", :style => "width:30px;", :value => "#{@project.positions}"}/
+                          %br
+                          %input{:type => "submit", :class => "submit-button", :value => "Submit", :style => "float:right;"}/ 
+                    
+
+
+        
+  .twocol
+    .org-panel-box
+      %p{:class => "recent-item-header"} Recent Projects
+      -@recent_projects.each do |project|
+        .row
+          .recent-item
+            %a{:href => ("/project/#{project.id}")} #{project.name} 

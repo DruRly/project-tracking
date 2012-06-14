@@ -1,0 +1,30 @@
+.row
+  .ninecol
+    .org-show
+      .row
+        .tencol 
+          .ninecol
+            .eightcol
+              .show-item
+                .row
+                  .fivecol 
+                    Add Organization
+                    .row
+                      .onecol
+                        &nbsp;
+                      .ninecol
+                        %form{:method => "post", :action => "/organization", :class => "request_form"}
+                          Organization Name:
+                          %input{:name => "name", :type => "text"}/
+                          %input{:type => "submit", :class => "submit-button", :value => "Submit"}/ 
+                    
+
+
+        
+  .twocol
+    .org-panel-box
+      %p{:class => "recent-item-header"} Recent Projects
+      -@recent_projects.each do |project|
+        .row
+          .recent-item
+            %a{:href => ("/project/#{project.id}")} #{project.name} 

@@ -1,0 +1,47 @@
+.row
+  .ninecol
+    .org-show
+      .row
+        .tencol 
+          .ninecol
+            .eightcol
+              .show-item
+                .row
+                  .sixcol
+                    #{@project.name}
+                  .fivecol
+                    Open Postions: #{@accepted_count} / #{@project.positions}
+                .row
+                  .sixcol
+                    .show-description 
+                      %p #{@project.description}
+                  .fivecol
+                    Requests: #{@project.requests.count}
+
+                .request
+                  %p Send Request 
+                  %center
+                    %form{:class => "request_form", :action => "/request/#{@project.id}", :method => "post"}
+                      Name:
+                      %input{:name => "name", :type => "text"}/
+                      FSU Email:
+                      %input{:name => "email", :type => "text"}/
+                      %input{:type => "submit", :class => "submit-button", :value => "Submit"}/
+                - if authorized? 
+                  %br
+                  .row 
+                    .twocol
+                      %p 
+                        %form{:class => "request_form", :action => "/project_delete/#{@project.id}", :method => "post"}
+                          %input{:type => "hidden", :name => "_method", :value => "DELETE"}
+                          %input{:type => "submit", :value => "Delete", :class => "submit-button"}
+                    .twocol
+                      %p 
+                        %a{:href => url("/project_edit/#{@project.id}"), :class => "submit-button", :style => "margin-top:23px"} Edit 
+  .twocol
+    .org-panel-box
+      %p{:class => "recent-item-header"} Recent Projects
+      -@recent_projects.each do |project|
+        .row
+          .recent-item
+            %a{:href => ("/project/#{project.id}")} #{project.name} 
